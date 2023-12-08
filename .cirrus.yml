@@ -37,6 +37,7 @@ task:
     - cd ./android_frameworks_base
     - git push -u origin $BRANCH_NAME
 
- rebase_script:
+  rebase_script:
+    - cd ./android_frameworks_base
     - git rebase -i 6ff78c3641350f2daf37de18e45dbc3e34c96686
     - git push -f -u origin $BRANCH_NAME
