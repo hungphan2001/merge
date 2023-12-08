@@ -1,0 +1,40 @@
+env:
+    CIRRUS_CLONE_DEPTH: 1
+    BUILD_HOSTNAME: "CirrusCI"
+    CIRRUS_WORKING_DIR: "/tmp/ci"
+    GH_USERNAME: 
+    GH_EMAIL: 
+    GH_TOKEN: 
+    BRANCH_NAME: "udc"
+    ANDROID_R: 
+
+task:
+  name: Merge android frameworks base
+  only_if: $CIRRUS_REPO_OWNER == 'hungphan2001' && $CIRRUS_BRANCH == $BRANCH_NAME
+  skip: $CIRRUS_BRANCH != $BRANCH_NAME
+  container:
+    image: dopaemon/focal:latest
+    cpu: 4
+    memory: 8G
+
+  setup_package_script:
+    - sudo apt-get install sshpass -y
+
+  setup_git_script:
+    - git config --global user.name $GH_USERNAME
+    - git config --global user.email $GH_EMAIL
+    - git config --global credential.helper store
+    - sshpass -p $GH_TOKEN git clone https://hungphan2001@github.com/X-UI-Unofficial/Store-Passwd.git ./.store
+
+  clone_repo_script:
+    - git clone -b $BRANCH_NAME --single-branch https://github.com/CherishOS/android_frameworks_base.git ./android_frameworks_base
+
+  merge_script:
+    - cd ./android_frameworks_base
+    - git remote add origin GrapheneOS https://github.com/GrapheneOS/platform_frameworks_base.git
+    - git fetch GrapheneOS 14
+    - git merge --no-edit FETCH_HEAD
+
+  push_repo:
+    - cd ./android_frameworks_base
+    - git push -u origin $BRANCH_NAME
