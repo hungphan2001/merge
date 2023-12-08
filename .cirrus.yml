@@ -10,8 +10,6 @@ env:
 
 task:
   name: Merge android frameworks base
-  only_if: $CIRRUS_REPO_OWNER == 'hungphan2001' && $CIRRUS_BRANCH == $BRANCH_NAME
-  skip: $CIRRUS_BRANCH != $BRANCH_NAME
   container:
     image: dopaemon/focal:latest
     cpu: 4
