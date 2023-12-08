@@ -33,6 +33,6 @@ task:
     - git fetch https://github.com/GrapheneOS/platform_frameworks_base.git -t 14
     - git merge --no-edit FETCH_HEAD
 
-  push_repo:
+  push_repo_script:
     - cd ./android_frameworks_base
     - git push -u origin $BRANCH_NAME
