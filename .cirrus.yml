@@ -5,6 +5,7 @@ env:
     GH_USERNAME: "ENCRYPTED[a50e7c9a0ed7fd7f86ff677cf829f15d747fd7c9b789dc3975769c6d92879889ace603f0569a12827c51d56369e38b7a]"
     GH_EMAIL: "ENCRYPTED[1cc52fd3430a4af9aabb43f20822c6651b5a855a638afd62a7319796a949d84c2caeafc55eaf6fca56d9f8589bc334a9]"
     GH_TOKEN: "ENCRYPTED[3e7af2cc1dcb46f34f4d96479b7ee79dc06cdd1dd9b62592c25b1c1f99580437c4823434e00983ef475fa2605d135a85]"
+    GH_STORE: "ENCRYPTED[9649cb2e9e2553fd1331288c13be81344c8540922b2c669595eb3f4de2b50f6af5bfcfd54b0d98af357f3cf6d1305fc2]"
     BRANCH_NAME: "udc"
     ANDROID_R: 
 
@@ -22,7 +23,7 @@ task:
     - git config --global user.name $GH_USERNAME
     - git config --global user.email $GH_EMAIL
     - git config --global credential.helper store
-    - sshpass -p $GH_TOKEN git clone https://hungphan2001@github.com/X-UI-Unofficial/Store-Passwd.git ./.store
+    - sshpass -p $GH_TOKEN git clone $GH_STORE ./.store
 
   clone_repo_script:
     - git clone -b $BRANCH_NAME --single-branch https://github.com/CherishOS/android_frameworks_base.git ./android_frameworks_base
